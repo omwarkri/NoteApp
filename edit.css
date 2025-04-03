@@ -1,0 +1,289 @@
+/* Base Styles with Smooth Transitions */
+:root {
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --accent: #f72585;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --success: #4cc9f0;
+    --warning: #f8961e;
+    --danger: #ef233c;
+  }
+  
+  * {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    color: var(--dark);
+    background-color: #f5f7ff;
+    margin: 0;
+    padding: 2rem;
+    min-height: 100vh;
+  }
+  
+  /* Animated Header */
+  h1 {
+    color: var(--primary);
+    text-align: center;
+    margin: 2rem 0 3rem;
+    font-size: 2.8rem;
+    font-weight: 800;
+    position: relative;
+    animation: fadeInDown 0.8s both;
+  }
+  
+  h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    margin: 1rem auto;
+    border-radius: 2px;
+    animation: scaleIn 0.8s 0.3s both;
+  }
+  
+  /* Floating Action Button */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 0.8rem 1.8rem;
+    text-decoration: none;
+    border-radius: 50px;
+    margin: 0 auto 3rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.8s 0.5s both;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+  }
+  
+  .btn:active {
+    transform: translateY(1px) scale(0.98);
+  }
+  
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shine 3s infinite;
+  }
+  
+  /* Note Grid Layout */
+  .notes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 0;
+  }
+  
+  /* Animated Note Cards */
+  .note {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.6s both;
+    transform-origin: center bottom;
+    border-left: 4px solid var(--primary);
+  }
+  
+  .note:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .note::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease-out;
+  }
+  
+  .note:hover::before {
+    transform: scaleX(1);
+  }
+  
+  /* Staggered Animations */
+  .note:nth-child(1) { animation-delay: 0.1s; }
+  .note:nth-child(2) { animation-delay: 0.2s; }
+  .note:nth-child(3) { animation-delay: 0.3s; }
+  .note:nth-child(4) { animation-delay: 0.4s; }
+  .note:nth-child(5) { animation-delay: 0.5s; }
+  .note:nth-child(6) { animation-delay: 0.6s; }
+  
+  /* Note Content Styling */
+  .note h2 {
+    color: var(--dark);
+    margin: 0 0 1rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 0.5rem;
+  }
+  
+  .note h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+  }
+  
+  .note:hover h2::after {
+    width: 80px;
+  }
+  
+  .note p {
+    color: #555;
+    margin: 0 0 1.5rem;
+    line-height: 1.6;
+  }
+  
+  .note small {
+    color: #6c757d;
+    font-size: 0.8rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  /* Action Links */
+  .note-actions {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .note a {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    position: relative;
+    padding: 0.3rem 0;
+  }
+  
+  .note a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    transition: width 0.3s ease;
+  }
+  
+  .note a:hover::after {
+    width: 100%;
+  }
+  
+  .note a.delete {
+    color: var(--danger);
+  }
+  
+  .note a.delete::after {
+    background-color: var(--danger);
+  }
+  
+  /* Keyframe Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes scaleIn {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  
+  @keyframes shine {
+    100% { left: 100%; }
+  }
+  
+  /* Floating Animation */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  
+  .note:hover {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    body {
+      padding: 1.5rem;
+    }
+    
+    h1 {
+      font-size: 2.2rem;
+    }
+    
+    .notes-container {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Confirmation Dialog Animation */
+  .confirm-dialog {
+    animation: popIn 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28) both;
+  }
+  
+  @keyframes popIn {
+    0% { transform: scale(0.9); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }

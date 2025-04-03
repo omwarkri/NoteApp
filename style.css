@@ -1,62 +1,309 @@
+/* General Styles with Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    text-align: center;
-}
-
-h1 {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
     color: #333;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+    margin: 0;
+    padding: 30px;
+    min-height: 100vh;
 }
 
+/* Header with Animation */
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.8rem;
+    position: relative;
+    animation: slideDown 0.8s ease-out;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Gradient Underline Animation */
+h1::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 5px;
+    background: linear-gradient(90deg, #3498db, #9b59b6);
+    margin: 15px auto;
+    border-radius: 5px;
+    animation: underlineGrow 1s ease-out 0.5s both;
+}
+
+@keyframes underlineGrow {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100px;
+    }
+}
+
+/* Button with Pulse Animation */
 .btn {
     display: inline-block;
-    padding: 10px 20px;
-    background: blue;
+    background: linear-gradient(135deg, #3498db 0%, #9b59b6 100%);
     color: white;
+    padding: 12px 25px;
     text-decoration: none;
-    margin-bottom: 20px;
-}
-
-.notes-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.note {
-    width: 300px;
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin: 10px;
-    border-radius: 5px;
-    background: #f9f9f9;
-}
-
-.note h2 {
-    margin: 0 0 10px;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-input, textarea {
-    margin: 5px 0;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-button {
-    padding: 10px;
-    background: green;
-    color: white;
+    border-radius: 50px;
+    margin: 0 auto 40px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     border: none;
-    border-radius: 5px;
     cursor: pointer;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.8s ease-out 0.3s both;
+    display: block;
+    width: fit-content;
 }
 
+.btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(52, 152, 219, 0.4);
+}
 
+.btn:active {
+    transform: translateY(1px);
+}
+
+/* Button Ripple Effect */
+.btn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.btn:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(20, 20);
+        opacity: 0;
+    }
+}
+
+/* Notes Container with Staggered Animation */
+.notes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+/* Note Card with Floating Animation */
+.note {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
+    transform-origin: center bottom;
+    border-left: 5px solid #3498db;
+}
+
+.note:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.note::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #3498db, #9b59b6);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease-out;
+}
+
+.note:hover::before {
+    transform: scaleX(1);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Staggered animations for notes */
+.note:nth-child(1) { animation-delay: 0.1s; }
+.note:nth-child(2) { animation-delay: 0.2s; }
+.note:nth-child(3) { animation-delay: 0.3s; }
+.note:nth-child(4) { animation-delay: 0.4s; }
+.note:nth-child(5) { animation-delay: 0.5s; }
+.note:nth-child(6) { animation-delay: 0.6s; }
+
+/* Note Content Styles */
+.note h2 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.6rem;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.note h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: #3498db;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.note:hover h2::after {
+    width: 100px;
+}
+
+.note p {
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+.note small {
+    color: #7f8c8d;
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* Action Links with Slide-in Animation */
+.note a {
+    color: #3498db;
+    text-decoration: none;
+    margin-right: 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 3px;
+    transition: all 0.3s ease;
+}
+
+.note a::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #3498db;
+    transition: width 0.3s ease;
+}
+
+.note a:hover::before {
+    width: 100%;
+}
+
+.note a:last-child {
+    color: #e74c3c;
+}
+
+.note a:last-child:hover {
+    color: #c0392b;
+}
+
+.note a:last-child::before {
+    background-color: #e74c3c;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+    
+    .notes-container {
+        grid-template-columns: 1fr;
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+    }
+}
+
+/* Floating Animation for Note Cards */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.note:hover {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Confirmation Dialog Animation */
+.confirm-dialog {
+    animation: popIn 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28) both;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
