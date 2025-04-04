@@ -18,5 +18,5 @@ A simple **Note-Taking App** built using **PHP, MySQL, HTML, CSS, and JavaScript
 ## 🔧 Installation  
 ### Step 1: Clone the Repository  
 ```sh
-git clone https://github.com/your-username/NoteApp.git
+git clone https://github.com/omwarkri/NoteApp.git
 cd NoteApp
